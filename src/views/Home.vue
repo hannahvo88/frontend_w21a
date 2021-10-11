@@ -40,48 +40,7 @@ export default {
       authUser: cookies.get('userId')
     }
   },
-  computed: {
 
-    users:{
-      get(){
-        return this.$store.state.users
-      },
-    },
-    myFollows:{
-      get(){
-        return this.$store.state.myFollows
-      },
-      set(value){
-        this.$store.commit('setmyFollows',value)
-      }
-    }
-  },
-  mounted() {
-    this.getTweets();
-    this.getUsers();
-    this.getFollowers();
-  },
-  methods: {
-    newTweet(tweet) {
-      this.tweets = [tweet].concat(this.tweets);
-    },
-    getTweets() {
-      api().get('tweets').then(response => {
-        this.tweets = response.data.sort((a, b) => b.tweetId - a.tweetId);
-
-      })
-    },
-    getUsers() {
-      this.$store.dispatch('getUsers',{})
-    },
-    getFollowers() {
-      // eslint-disable-next-line no-unused-vars
-      this.$store.dispatch('getFollowers',{}).then((response)=>{
-        this.loaded = true;
-      })
-    }
-
-  }
 }
 </script>
 <style scoped>
